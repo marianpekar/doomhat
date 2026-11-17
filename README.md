@@ -2,6 +2,8 @@
 
 Based on [doomgeneric](https://github.com/ozkl/doomgeneric) by [@ozkl](https://github.com/ozkl).
 
+![doomhat](https://marianpekar.com/uploads/doomhat.gif)
+
 This port is made for playing doom on [Waveshare 1.44inch LCD HAT](https://www.waveshare.com/wiki/1.44inch_LCD_HAT). I've built and tested it on [Raspberry Pi Zero 2 W](https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/) with [Waveshare UPC Hat](https://www.waveshare.com/wiki/UPS_HAT_(C)) attached so I can play Doom wherever I go.
 
 It runs nice and smoothly on that tiny chip but you might need to use zoom* when playing it, depends on you eyesight.
