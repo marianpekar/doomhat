@@ -12,4 +12,4 @@ Build/
 doomgeneric.map
 *.WAD
 *.savegame
-doomgeneric
+doomgeneric/doomgeneric
