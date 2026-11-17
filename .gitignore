@@ -11,3 +11,5 @@ Release/
 Build/
 doomgeneric.map
 *.WAD
+*.savegame
+doomgeneric
