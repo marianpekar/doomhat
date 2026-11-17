@@ -10,7 +10,7 @@ It runs nice and smoothly on that tiny chip but you might need to use zoom* when
 
 ## Setup Guide
 
-1. Get an MicroSD card (I have 16 GB one, but fast, speed is more important than size here... \*cough\*) and use [rpi-imager](https://www.raspberrypi.com/software/) to flash in the OS. By the time of making this, I used Raspberry Pi OS (64-bit) released 2026-10-06. Don't forget to enable SSH and provide credentials to your local network (if you forgot them, ask your neighbors, they might know...)
+1. Get an MicroSD card (I have 16 GB one, but fast, speed is more important than size here... \*cough\*) and use [rpi-imager](https://www.raspberrypi.com/software/) to flash in the OS. By the time of making this, I used Raspberry Pi OS (64-bit) released 2026-10-06. Don't forget to enable SSH and provide credentials to your Wi-Fi (if you forgot them, ask your neighbors, they might know...)
 2. If you have both Waveshare 1.44inch LCD HAT and Waveshare UPC Hat, make a sandwitch where these two components are bread and your Raspberry Pi Zero 2 W is a ham.
 3. Gently insert MicroSD card, then pull back because you tried to insert it the wrong way, flip it and insert the correct way.
 4. You might want to plug USB cable to give some juice to the Li-on batery on UPC hat and prevent shutdown during installation process.
