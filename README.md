@@ -72,7 +72,7 @@ cd doomhat
 | Joystick Down | Move backward | *-* |
 | Joystick Left | Turn left | Strafe left |
 | Joystick Right | Turn right | Strafe right |
-| Joystick Press | Use / Open doors / Confirm | *-* |
+| Joystick Press | Use / Open doors / Confirm | Toggle map |
 | KEY1 | Fire weapon | Previous weapon (`,`) |
 | KEY2 | **When held, the secondary action is applied.** | *-* |
 | KEY3 | Open menu / Escape | Next weapon (`.`) |
