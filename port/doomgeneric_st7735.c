@@ -32,22 +32,28 @@
 #define PIN_KEY2 20
 #define PIN_KEY3 16
 
+#define KEY_PREV_WEAPON ','
+#define KEY_NEXT_WEAPON '.'
+
+#define MODIFIER_PIN PIN_KEY2
+
 typedef struct {
     int pin;
-    unsigned char key;  // primary
+    unsigned char key; // primary action
     unsigned char key2; // optional second key sent; 0 = none
-    int state; // 1 = pressed
+    unsigned char mod_key; // secondary action while the modifier is held; 0 = none
+    int state; // 0 = up, 1 = pressed (primary), 2 = pressed (modifier)
 } Btn;
 
 static Btn btns[] = {
-    { PIN_UP,    KEY_UPARROW,    0,         0 },  // forward
-    { PIN_DOWN,  KEY_DOWNARROW,  0,         0 },  // backward
-    { PIN_LEFT,  KEY_LEFTARROW,  0,         0 },  // turn left
-    { PIN_RIGHT, KEY_RIGHTARROW, 0,         0 },  // turn right
-    { PIN_PRESS, KEY_USE,        KEY_ENTER, 0 },  // use/open + confirm
-    { PIN_KEY1,  KEY_FIRE,       0,         0 },  // fire
-    { PIN_KEY2,  KEY_RALT,       0,         0 },  // strafe modifier
-    { PIN_KEY3,  KEY_ESCAPE,     0,         0 },  // menu
+    { PIN_UP,    KEY_UPARROW,    0,         0,               0 },
+    { PIN_DOWN,  KEY_DOWNARROW,  0,         0,               0 },
+    { PIN_LEFT,  KEY_LEFTARROW,  0,         0,               0 },
+    { PIN_RIGHT, KEY_RIGHTARROW, 0,         0,               0 },
+    { PIN_PRESS, KEY_USE,        KEY_ENTER, 0,               0 },
+    { PIN_KEY1,  KEY_FIRE,       0,         KEY_PREV_WEAPON, 0 },
+    { PIN_KEY2,  KEY_RALT,       0,         0,               0 },
+    { PIN_KEY3,  KEY_ESCAPE,     0,         KEY_NEXT_WEAPON, 0 },
 };
 #define NUM_BTNS ((int)(sizeof(btns) / sizeof(btns[0])))
 
@@ -71,12 +77,28 @@ static void que_push(int pressed, unsigned char key)
 
 static void poll_buttons(void)
 {
+    int mod_held = (DEV_Digital_Read(MODIFIER_PIN) == 0);
+
     for (int i = 0; i < NUM_BTNS; i++) {
-        int pressed = (DEV_Digital_Read(btns[i].pin) == 0);
-        if (pressed != btns[i].state) {
-            btns[i].state = pressed;
-            que_push(pressed, btns[i].key);
-            if (btns[i].key2) que_push(pressed, btns[i].key2);
+        Btn *b = &btns[i];
+        int down = (DEV_Digital_Read(b->pin) == 0);
+
+        if (down && b->state == 0) {
+            b->state = (mod_held && b->mod_key) ? 2 : 1;
+            if (b->state == 2) {
+                que_push(1, b->mod_key);
+            } else {
+                que_push(1, b->key);
+                if (b->key2) que_push(1, b->key2);
+            }
+        } else if (!down && b->state != 0) {
+            if (b->state == 2) {
+                que_push(0, b->mod_key);
+            } else {
+                que_push(0, b->key);
+                if (b->key2) que_push(0, b->key2);
+            }
+            b->state = 0;
         }
     }
 }
