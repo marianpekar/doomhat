@@ -30,8 +30,8 @@ chmod +x "$ROOT/run.sh"
 echo "Building"
 "$ROOT/run.sh" -b
 
-# The user needs access to GPIO and SPI without sudo
-for grp in gpio spi; do
+# The user needs access to GPIO, SPI and I2C without sudo
+for grp in gpio spi i2c; do
     if getent group "$grp" >/dev/null && ! id -nG "$RUN_USER" | grep -qw "$grp"; then
         echo "Adding $RUN_USER to group $grp (log out/in or reboot to apply)"
         sudo usermod -aG "$grp" "$RUN_USER"

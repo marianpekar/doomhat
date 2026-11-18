@@ -17,11 +17,12 @@ It runs nice and smoothly on that tiny chip, but you might need to use zoom* whe
 3. Gently insert the microSD card, then pull it back out because you tried to insert it the wrong way, flip it and insert it the correct way.
 4. You might want to plug in a USB cable to give some juice to the battery on the UPS HAT and prevent a shutdown during the installation process.
 5. Connect to your Raspberry Pi via SSH.
-6. Enable the SPI interface:
+6. Enable the SPI interface (for the LCD) and the I2C interface (for the battery indicator, read from the UPS HAT):
 
 ```shell
 sudo raspi-config
 # Choose Interface Options -> SPI -> Yes to enable the SPI interface
+# Choose Interface Options -> I2C -> Yes to enable the I2C interface
 ```
 
 7. Enable pull-up resistors on the GPIO pins used by the joystick and buttons:

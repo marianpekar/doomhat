@@ -39,6 +39,17 @@
 
 #define MODIFIER_PIN PIN_KEY2
 
+#define BAT_I2C_BUS 1
+#define BAT_I2C_ADDR 0x43
+#define BAT_REG_BUS_VOLTAGE 0x02
+#define BAT_V_EMPTY 3.0f
+#define BAT_V_FULL 4.2f
+#define BAT_POLL_MS 10000
+#define BAT_COLS 10
+#define BAT_ROWS 2
+#define BAT_GREEN 0xE007
+#define BAT_RED 0x00F8
+
 typedef struct {
     int pin;
     unsigned char key; // primary action
@@ -123,8 +134,67 @@ static void build_maps(void)
     }
 }
 
+static int bat_handle = -1;
+static int bat_level = -1;
+static uint32_t bat_last_poll = 0;
+
+static void bat_init(void)
+{
+    bat_handle = lgI2cOpen(BAT_I2C_BUS, BAT_I2C_ADDR, 0);
+    if (bat_handle < 0) {
+        fprintf(stderr, "Battery monitor not available (I2C open failed)\n");
+        bat_handle = -1;
+    }
+}
+
+static void bat_poll(void)
+{
+    if (bat_handle < 0)
+        return;
+
+    uint32_t now = DG_GetTicksMs();
+    if (bat_level >= 0 && now - bat_last_poll < BAT_POLL_MS)
+        return;
+    bat_last_poll = now;
+
+    int raw = lgI2cReadWordData(bat_handle, BAT_REG_BUS_VOLTAGE);
+    if (raw < 0) {
+        bat_level = -1;
+        return;
+    }
+    
+    raw = ((raw & 0xFF) << 8) | ((raw >> 8) & 0xFF); // INA219 is big-endian
+    
+    float volts = (float)(raw >> 3) * 0.004f;
+    float pct = (volts - BAT_V_EMPTY) / (BAT_V_FULL - BAT_V_EMPTY) * 100.0f;
+
+    if (pct < 0.0f) {
+        pct = 0.0f;
+    }
+
+    if (pct > 100.0f) {
+        pct = 100.0f;
+    }
+    bat_level = (int)(pct / (100.0f / BAT_COLS) + 0.5f);
+}
+
+static void bat_draw(void)
+{
+    if (bat_level < 0)
+        return;
+
+    for (int y = 0; y < BAT_ROWS; y++) {
+        UWORD *row = lcd_buf + y * LCD_W + (LCD_W - BAT_COLS);
+        for (int x = 0; x < BAT_COLS; x++)
+            row[x] = (x < bat_level) ? BAT_GREEN : BAT_RED;
+    }
+}
+
 static void cleanup(void)
 {
+    if (bat_handle >= 0)
+        lgI2cClose(bat_handle);
+
     LCD_1in44_Clear(BLACK);
     DEV_ModuleExit();
 }
@@ -151,6 +221,7 @@ void DG_Init(void)
 
     memset(lcd_buf, 0, sizeof(lcd_buf));
     build_maps();
+    bat_init();
 
     signal(SIGINT,  on_signal);
     signal(SIGTERM, on_signal);
@@ -171,6 +242,9 @@ void DG_DrawFrame(void)
             dst[x] = c;
         }
     }
+
+    bat_poll();
+    bat_draw();
 
     LCD_1in44_Display(lcd_buf);
 }
