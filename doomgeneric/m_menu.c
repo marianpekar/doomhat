@@ -234,8 +234,6 @@ enum
     options,
     loadgame,
     savegame,
-    readthis,
-    quitdoom,
     main_end
 } main_e;
 
@@ -327,12 +325,10 @@ menu_t  NewDef =
 //
 enum
 {
-    endgame,
     messages,
     detail,
     scrnsize,
     option_empty1,
-    mousesens,
     option_empty2,
     soundvol,
     opt_end
@@ -340,12 +336,10 @@ enum
 
 menuitem_t OptionsMenu[]=
 {
-    {1,"M_ENDGAM",	M_EndGame,'e'},
     {1,"M_MESSG",	M_ChangeMessages,'m'},
     {1,"M_DETAIL",	M_ChangeDetail,'g'},
     {2,"M_SCRNSZ",	M_SizeDisplay,'s'},
     {-1,"",0,'\0'},
-    {2,"M_MSENS",	M_ChangeSensitivity,'m'},
     {-1,"",0,'\0'},
     {1,"M_SVOL",	M_Sound,'s'}
 };
@@ -993,9 +987,6 @@ void M_DrawOptions(void)
     V_DrawPatchDirect(OptionsDef.x + 120, OptionsDef.y + LINEHEIGHT * messages,
                       W_CacheLumpName(DEH_String(msgNames[showMessages]),
                                       PU_CACHE));
-
-    M_DrawThermo(OptionsDef.x, OptionsDef.y + LINEHEIGHT * (mousesens + 1),
-		 10, mouseSensitivity);
 
     M_DrawThermo(OptionsDef.x,OptionsDef.y+LINEHEIGHT*(scrnsize+1),
 		 9,screenSize);
@@ -2092,7 +2083,6 @@ void M_Init (void)
     {
       case commercial:
         // Commercial has no "read this" entry.
-	MainMenu[readthis] = MainMenu[quitdoom];
 	MainDef.numitems--;
 	MainDef.y += 8;
 	NewDef.prevMenu = &MainDef;
