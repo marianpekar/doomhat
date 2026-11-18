@@ -68,8 +68,8 @@ cd doomhat
 
 | Input | Primary Action | Secondary Action |
 |---|---|---|
-| Joystick Up | Move forward | *-* |
-| Joystick Down | Move backward | *-* |
+| Joystick Up | Move forward | Map zoom in |
+| Joystick Down | Move backward | Map zoom out |
 | Joystick Left | Turn left | Strafe left |
 | Joystick Right | Turn right | Strafe right |
 | Joystick Press | Use / Open doors / Confirm | Toggle map |

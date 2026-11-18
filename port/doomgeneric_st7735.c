@@ -34,6 +34,8 @@
 
 #define KEY_PREV_WEAPON ','
 #define KEY_NEXT_WEAPON '.'
+#define KEY_MAP_ZOOMIN '='
+#define KEY_MAP_ZOOMOUT '-'
 
 #define MODIFIER_PIN PIN_KEY2
 
@@ -46,8 +48,8 @@ typedef struct {
 } Btn;
 
 static Btn btns[] = {
-    { PIN_UP,    KEY_UPARROW,    0,         0,               0 },
-    { PIN_DOWN,  KEY_DOWNARROW,  0,         0,               0 },
+    { PIN_UP,    KEY_UPARROW,    0,         KEY_MAP_ZOOMIN,  0 },
+    { PIN_DOWN,  KEY_DOWNARROW,  0,         KEY_MAP_ZOOMOUT, 0 },
     { PIN_LEFT,  KEY_LEFTARROW,  0,         0,               0 },
     { PIN_RIGHT, KEY_RIGHTARROW, 0,         0,               0 },
     { PIN_PRESS, KEY_USE,        KEY_ENTER, KEY_TAB,         0 },
