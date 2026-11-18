@@ -329,7 +329,6 @@ enum
     detail,
     scrnsize,
     option_empty1,
-    option_empty2,
     soundvol,
     opt_end
 } options_e;
@@ -339,7 +338,6 @@ menuitem_t OptionsMenu[]=
     {1,"M_MESSG",	M_ChangeMessages,'m'},
     {1,"M_DETAIL",	M_ChangeDetail,'g'},
     {2,"M_SCRNSZ",	M_SizeDisplay,'s'},
-    {-1,"",0,'\0'},
     {-1,"",0,'\0'},
     {1,"M_SVOL",	M_Sound,'s'}
 };
