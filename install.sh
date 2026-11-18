@@ -16,6 +16,7 @@ if [ "${1:-}" = "--uninstall" ]; then
     sudo systemctl disable --now "$SERVICE" 2>/dev/null || true
     sudo rm -f "$UNIT"
     sudo systemctl daemon-reload
+    sudo loginctl disable-linger "$RUN_USER"
     echo "Removed $SERVICE service."
     exit 0
 fi
@@ -37,15 +38,23 @@ for grp in gpio spi; do
     fi
 done
 
-echo "== Writing $UNIT =="
+RUN_UID="$(id -u "$RUN_USER")"
+if ! loginctl show-user "$RUN_USER" -p Linger 2>/dev/null | grep -q "yes"; then
+    echo "Enabling lingering for $RUN_USER (user audio session at boot)"
+    sudo loginctl enable-linger "$RUN_USER"
+fi
+
+echo "Writing $UNIT"
 sudo tee "$UNIT" >/dev/null <<EOF
 [Unit]
 Description=Doom on Waveshare 1.44" LCD HAT
-After=multi-user.target
+After=multi-user.target user@$RUN_UID.service
+Wants=user@$RUN_UID.service
 
 [Service]
 Type=simple
 User=$RUN_USER
+Environment=XDG_RUNTIME_DIR=/run/user/$RUN_UID
 WorkingDirectory=$ROOT
 ExecStart=$ROOT/run.sh
 Restart=on-failure
@@ -62,6 +71,6 @@ sudo systemctl enable "$SERVICE"
 
 echo
 echo "Done. Doom will start at next boot."
-echo "Start it now with:  sudo systemctl start $SERVICE"
+echo "Start it now with: sudo systemctl start $SERVICE"
 echo "Log (errors only): journalctl -u $SERVICE -f"
 echo "Remove with: ./install.sh --uninstall"

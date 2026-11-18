@@ -62,5 +62,10 @@ if [ -z "$WAD" ] || [ ! -f "$WAD" ]; then
     exit 1
 fi
 
+SOUNDFONT="/usr/share/sounds/sf2/TimGM6mb.sf2"
+if [ -z "${SDL_SOUNDFONTS:-}" ] && [ -f "$SOUNDFONT" ]; then
+    export SDL_SOUNDFONTS="$SOUNDFONT"
+fi
+
 echo "Running $WAD"
 exec "$BIN" -iwad "$WAD" "$@"

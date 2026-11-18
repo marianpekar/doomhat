@@ -39,30 +39,55 @@ gpio=6,19,5,26,13,21,20,16=pu
 sudo reboot
 ```
 
-10. Clone this repository:
+10. Install the SDL2 libraries used for sound:
+
+```shell
+sudo apt install libsdl2-dev libsdl2-mixer-dev
+```
+
+The General MIDI SoundFont `timgm6mb-soundfont` should already be included in Raspberry Pi OS; at least, it is in the 2026-10-06 release of Raspberry Pi OS with desktop.
+
+11. Clone this repository:
 
 ```shell
 git clone https://github.com/marianpekar/doomhat
 ```
 
-11. Get an IWAD file (e.g. `DOOM.WAD`, the shareware `doom1.wad`, or the free [Freedoom](https://freedoom.github.io/) `freedoom1.wad`) and copy it into the `doomhat` directory as `DOOM.WAD`. If the file is on your computer, run this on your computer, not on the Pi:
+12. Get an IWAD file (e.g. `DOOM.WAD`, the shareware `doom1.wad`, or the free [Freedoom](https://freedoom.github.io/) `freedoom1.wad`) and copy it into the `doomhat` directory as `DOOM.WAD`. If the file is on your computer, run this on your computer, not on the Pi:
 
 ```shell
 scp DOOM.WAD <user>@<pi-ip>:~/doomhat/DOOM.WAD
 ```
 
-12. Back on the Pi, use `run.sh` to build and run the game:
+13. Back on the Pi, use `run.sh` to build and run the game:
 
 ```shell
 cd doomhat
 ./run.sh
 ```
 
-13. The game should be running now. Quit it with `Ctrl+C`, then run `install.sh`, which adds a systemd service that runs `run.sh` at boot. You can disable it later by running `./install.sh --uninstall`.
+14. The game should be running now. Quit it with `Ctrl+C`, then run `install.sh`, which adds a systemd service that runs `run.sh` at boot. You can disable it later by running `./install.sh --uninstall`.
 
 ```shell
 ./install.sh
 ```
+
+## Sound
+
+The Waveshare 1.44inch LCD HAT has no speaker and the Pi Zero 2 W has no audio jack, so sound goes to Bluetooth headphones (or any other output PipeWire knows about). Pair and trust them once, so they reconnect automatically:
+
+```shell
+bluetoothctl
+# power on
+# scan on
+# pair <MAC>
+# trust <MAC>
+# connect <MAC>
+```
+
+PipeWire runs in your user session, so `install.sh` enables lingering for your user (`loginctl enable-linger`), which starts that session at boot without logging in, and points the service at it via `XDG_RUNTIME_DIR`.
+
+Doom's music is MIDI, which needs a soundfont to be synthesized. `run.sh` points SDL_mixer at the small (~6 MB) `TimGM6mb.sf2` from `timgm6mb-soundfont` via `SDL_SOUNDFONTS`; the common FluidR3_GM is ~140 MB and gets loaded into RAM, which is a lot for the Pi Zero 2 W. To use a different soundfont, set `SDL_SOUNDFONTS` yourself before running `run.sh`. If the music doesn't play, make sure the soundfont is installed, or run without music: `./run.sh -- -nomusic`. If you hear crackling, lower `snd_samplerate` to `22050` in `doomgeneric/doomgenericdoom.cfg` (created after the first run).
 
 ## Controls
 
