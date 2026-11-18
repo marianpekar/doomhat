@@ -39,13 +39,11 @@ gpio=6,19,5,26,13,21,20,16=pu
 sudo reboot
 ```
 
-10. Install the SDL2 libraries used for sound:
+10. Install the SDL2 libraries used for sound and soundfont for MIDI music:
 
 ```shell
-sudo apt install libsdl2-dev libsdl2-mixer-dev
+sudo apt install libsdl2-dev libsdl2-mixer-dev timgm6mb-soundfont
 ```
-
-The General MIDI SoundFont `timgm6mb-soundfont` should already be included in Raspberry Pi OS; at least, it is in the 2026-10-06 release of Raspberry Pi OS with desktop.
 
 11. Clone this repository:
 
@@ -74,7 +72,7 @@ cd doomhat
 
 ## Sound
 
-The Waveshare 1.44inch LCD HAT has no speaker and the Pi Zero 2 W has no audio jack, so sound goes to Bluetooth headphones (or any other output PipeWire knows about). Pair and trust them once, so they reconnect automatically:
+The Waveshare 1.44inch LCD HAT has no speaker and the Pi Zero 2 W has no audio jack, so sound goes to Bluetooth headphones (or any other audio output device connected). Pair and trust them once, so they reconnect automatically:
 
 ```shell
 bluetoothctl
@@ -84,10 +82,6 @@ bluetoothctl
 # trust <MAC>
 # connect <MAC>
 ```
-
-PipeWire runs in your user session, so `install.sh` enables lingering for your user (`loginctl enable-linger`), which starts that session at boot without logging in, and points the service at it via `XDG_RUNTIME_DIR`.
-
-Doom's music is MIDI, which needs a soundfont to be synthesized. `run.sh` points SDL_mixer at the small (~6 MB) `TimGM6mb.sf2` from `timgm6mb-soundfont` via `SDL_SOUNDFONTS`; the common FluidR3_GM is ~140 MB and gets loaded into RAM, which is a lot for the Pi Zero 2 W. To use a different soundfont, set `SDL_SOUNDFONTS` yourself before running `run.sh`. If the music doesn't play, make sure the soundfont is installed, or run without music: `./run.sh -- -nomusic`. If you hear crackling, lower `snd_samplerate` to `22050` in `doomgeneric/doomgenericdoom.cfg` (created after the first run).
 
 ## Controls
 
