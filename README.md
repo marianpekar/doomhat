@@ -84,12 +84,20 @@ bluetoothctl
 # connect <MAC>
 ```
 
+The soundfont path is passed to SDL via `SDL_SOUNDFONTS`. To use a different soundfont, change `SOUNDFONT` in `run.sh`:
+
+```shell
+SOUNDFONT="/usr/share/sounds/sf2/TimGM6mb.sf2"
+```
+
+To run DOOM without music, use `./run.sh -- -nomusic`. Similarly, `-nosfx` disables sound effects and `-nosound` disables both (see `I_InitSound` function in `doomgeneric/i_sound.c`).
+
 ## Controls
 
 | Input | Primary Action | Secondary Action |
 |---|---|---|
-| Joystick Up | Move forward | Map zoom in |
-| Joystick Down | Move backward | Map zoom out |
+| Joystick Up | Move forward | Map zoom in (`=`) |
+| Joystick Down | Move backward | Map zoom out (`-`) |
 | Joystick Left | Turn left | Strafe left |
 | Joystick Right | Turn right | Strafe right |
 | Joystick Press | Use / Open doors / Confirm | Toggle map |
@@ -107,9 +115,9 @@ To save a game, press **KEY3** to open the menu and navigate to *Save Game* usin
 
 ```txt
 .
-├── doomgeneric/       copied from https://github.com/ozkl/doomgeneric
+├── doomgeneric/       copied from github.com/ozkl/doomgeneric and modified (see commits)
 ├── lib/               underlying hardware interface for the LCD HAT
-│   ├── Config/        from https://files.waveshare.com/upload/f/fa/1.44inch-LCD-HAT-Code.7z
+│   ├── Config/        from files.waveshare.com/upload/f/fa/1.44inch-LCD-HAT-Code.7z
 │   └── LCD/
 ├── port/
 │   └── doomgeneric_st7735.c  platform implementation (DG_Init, DG_DrawFrame, etc.), see https://github.com/ozkl/doomgeneric#porting
