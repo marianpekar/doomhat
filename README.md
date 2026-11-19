@@ -4,11 +4,11 @@ Based on [doomgeneric](https://github.com/ozkl/doomgeneric) by [@ozkl](https://g
 
 ![doomhat](https://marianpekar.com/uploads/doomhat.gif)
 
-- [Longer demo on YouTube](https://www.youtube.com/watch?v=OlOY1phLJtA)
+[Longer demo on YouTube](https://www.youtube.com/watch?v=OlOY1phLJtA)
 
 This port is made for playing Doom on the [Waveshare 1.44inch LCD HAT](https://www.waveshare.com/wiki/1.44inch_LCD_HAT). I've built and tested it on a [Raspberry Pi Zero 2 W](https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/) with a [Waveshare UPS HAT (C)](https://www.waveshare.com/wiki/UPS_HAT_(C)) attached, so I can play Doom wherever I go.
 
-It runs nice and smoothly on that tiny chip, but you might need to use zoom* when playing it, depending on your eyesight.
+It runs nice and smoothly on that tiny chip, but you might need to use zoom* when playing it, depending on your eyesight. With a fully charged 1000mAh Li-Po battery it lasts from 3 to 4 hours.
 
 *) Moving your head closer to the object observed.
 
