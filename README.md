@@ -1,4 +1,4 @@
-# doomhat
+# Pocket DOOM Handheld
 
 Based on [doomgeneric](https://github.com/ozkl/doomgeneric) by [@ozkl](https://github.com/ozkl).
 
