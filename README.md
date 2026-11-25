@@ -59,13 +59,7 @@ cd ..
 git clone https://github.com/marianpekar/doomhat
 ```
 
-13. Get an IWAD file (e.g. `DOOM.WAD`, the shareware `doom1.wad`, or the free [Freedoom](https://freedoom.github.io/) `freedoom1.wad`) and copy it into the `doomhat` directory as `DOOM.WAD`. If the file is on your computer, run this on your computer, not on the Pi:
-
-```shell
-scp DOOM.WAD <user>@<pi-ip>:~/doomhat/DOOM.WAD
-```
-
-14. Back on the Pi, use `run.sh` to build the port with `-b` flag to build only:
+13. Back on the Pi, use `run.sh` to build the port with `-b` flag to build only:
 
 ```shell
 cd doomhat
@@ -78,7 +72,13 @@ cd doomhat
 ./install.sh
 ```
 
-15. Reboot your Raspberry Pi:
+15. Get an IWAD file (e.g. `DOOM.WAD`, the shareware `doom1.wad`, or the free [Freedoom](https://freedoom.github.io/) `freedoom1.wad`) and copy it into the `doomhat` directory as `DOOM.WAD`. If the file is on your computer, run this on your computer, not on the Pi:
+
+```shell
+scp DOOM.WAD <user>@<pi-ip>:~/doomhat/DOOM.WAD
+```
+
+16. Reboot your Raspberry Pi:
 
 ```shell
 sudo reboot
