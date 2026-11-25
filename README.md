@@ -64,24 +64,26 @@ git clone https://github.com/marianpekar/doomhat
 scp DOOM.WAD <user>@<pi-ip>:~/doomhat/DOOM.WAD
 ```
 
-14. Back on the Pi, use `run.sh` to build and run the game:
+14. Back on the Pi, use `run.sh` to build the port with `-b` flag to build only:
 
 ```shell
 cd doomhat
-./run.sh
+./run.sh -b
 ```
 
-15. The game should be running now. Quit it with `Ctrl+C`, then run `install.sh`, which adds a systemd service that runs `run.sh` at boot. You can disable it later by running `./install.sh --uninstall`.
+14. If the build succeeds, run `install.sh`, which adds a systemd service that runs run.sh at boot. You can disable it later by running `./install.sh --uninstall`.
 
 ```shell
 ./install.sh
 ```
 
-16. Reboot your Raspberry Pi:
+15. Reboot your Raspberry Pi:
 
 ```shell
 sudo reboot
 ```
+
+On a Raspberry Pi Zero 2 W with Raspberry Pi OS (64-bit) 2026-10-06 release, the system and game should boot up in ~60 seconds.
 
 ## Sound
 
