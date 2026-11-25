@@ -36,41 +36,51 @@ gpio=6,19,5,26,13,21,20,16=pu
 ```
 
 8. Save and exit vim... don't Google it: press [ESC], type `:wq!` and press [ENTER].
-9. Reboot your Raspberry Pi:
+
+10. Get and build Linux libraries for manipulating GPIO:
 
 ```shell
-sudo reboot
+wget https://github.com/joan2937/lg/archive/master.zip
+unzip master.zip
+cd lg-master
+sudo make install 
 ```
 
-10. Install the SDL2 libraries used for sound and soundfont for MIDI music:
+11. Install the SDL2 libraries used for sound and soundfont for MIDI music:
 
 ```shell
 sudo apt install libsdl2-dev libsdl2-mixer-dev timgm6mb-soundfont
 ```
 
-11. Clone this repository:
+12. Clone this repository:
 
 ```shell
 git clone https://github.com/marianpekar/doomhat
 ```
 
-12. Get an IWAD file (e.g. `DOOM.WAD`, the shareware `doom1.wad`, or the free [Freedoom](https://freedoom.github.io/) `freedoom1.wad`) and copy it into the `doomhat` directory as `DOOM.WAD`. If the file is on your computer, run this on your computer, not on the Pi:
+13. Get an IWAD file (e.g. `DOOM.WAD`, the shareware `doom1.wad`, or the free [Freedoom](https://freedoom.github.io/) `freedoom1.wad`) and copy it into the `doomhat` directory as `DOOM.WAD`. If the file is on your computer, run this on your computer, not on the Pi:
 
 ```shell
 scp DOOM.WAD <user>@<pi-ip>:~/doomhat/DOOM.WAD
 ```
 
-13. Back on the Pi, use `run.sh` to build and run the game:
+14. Back on the Pi, use `run.sh` to build and run the game:
 
 ```shell
 cd doomhat
 ./run.sh
 ```
 
-14. The game should be running now. Quit it with `Ctrl+C`, then run `install.sh`, which adds a systemd service that runs `run.sh` at boot. You can disable it later by running `./install.sh --uninstall`.
+15. The game should be running now. Quit it with `Ctrl+C`, then run `install.sh`, which adds a systemd service that runs `run.sh` at boot. You can disable it later by running `./install.sh --uninstall`.
 
 ```shell
 ./install.sh
+```
+
+16. Reboot your Raspberry Pi:
+
+```shell
+sudo reboot
 ```
 
 ## Sound
