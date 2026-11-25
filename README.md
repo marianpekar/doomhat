@@ -35,9 +35,14 @@ sudo vi /boot/firmware/config.txt
 gpio=6,19,5,26,13,21,20,16=pu
 ```
 
-8. Save and exit vim... don't Google it: press [ESC], type `:wq!` and press [ENTER].
+8. Save and exit vim.
 
-10. Get and build Linux libraries for manipulating GPIO:
+*If Vim is not your friend:*
+   - Press `G` to jump to the end of the file, then `o` to open a new line in insert mode.
+   - Type `gpio=6,19,5,26,13,21,20,16=pu`
+   - Press `Esc`, type `:wq` and press `Enter` to save and exit.
+
+9. Get and build Linux libraries for manipulating GPIO:
 
 ```shell
 wget https://github.com/joan2937/lg/archive/master.zip
@@ -46,7 +51,7 @@ cd lg-master
 sudo make install 
 ```
 
-11. Install the SDL2 libraries used for sound and soundfont for MIDI music:
+110. Install the SDL2 libraries used for sound and soundfont for MIDI music:
 
 ```shell
 sudo apt install libsdl2-dev libsdl2-mixer-dev timgm6mb-soundfont
@@ -59,26 +64,20 @@ cd ..
 git clone https://github.com/marianpekar/doomhat
 ```
 
-13. Back on the Pi, use `run.sh` to build the port with `-b` flag to build only:
+13. Run `install.sh` to build the port with `run.sh -b` (build-only flag) and add a systemd service that runs `run.sh` at boot. You can disable it later by running `./install.sh --uninstall`.
 
 ```shell
 cd doomhat
-./run.sh -b
-```
-
-14. If the build succeeds, run `install.sh`, which adds a systemd service that runs run.sh at boot. You can disable it later by running `./install.sh --uninstall`.
-
-```shell
 ./install.sh
 ```
 
-15. Get an IWAD file (e.g. `DOOM.WAD`, the shareware `doom1.wad`, or the free [Freedoom](https://freedoom.github.io/) `freedoom1.wad`) and copy it into the `doomhat` directory as `DOOM.WAD`. If the file is on your computer, run this on your computer, not on the Pi:
+14. Get an IWAD file (e.g. `DOOM.WAD`, the shareware `doom1.wad`, or the free [Freedoom](https://freedoom.github.io/) `freedoom1.wad`) and copy it into the `doomhat` directory as `DOOM.WAD`. If the file is on your computer, run this on your computer, not on the Pi:
 
 ```shell
 scp DOOM.WAD <user>@<pi-ip>:~/doomhat/DOOM.WAD
 ```
 
-16. Reboot your Raspberry Pi:
+15. Reboot your Raspberry Pi:
 
 ```shell
 sudo reboot
