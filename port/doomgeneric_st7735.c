@@ -37,7 +37,7 @@
 #define KEY_MAP_ZOOMIN '='
 #define KEY_MAP_ZOOMOUT '-'
 
-#define MODIFIER_PIN PIN_KEY2
+#define MODIFIER_PIN PIN_PRESS
 
 #define BAT_I2C_BUS 1
 #define BAT_I2C_ADDR 0x43
@@ -63,9 +63,9 @@ static Btn btns[] = {
     { PIN_DOWN,  KEY_DOWNARROW,  0,         KEY_MAP_ZOOMOUT, 0 },
     { PIN_LEFT,  KEY_LEFTARROW,  0,         0,               0 },
     { PIN_RIGHT, KEY_RIGHTARROW, 0,         0,               0 },
-    { PIN_PRESS, KEY_USE,        KEY_ENTER, KEY_TAB,         0 },
+    { PIN_PRESS, KEY_RALT,       0,         0,               0 },
     { PIN_KEY1,  KEY_FIRE,       0,         KEY_PREV_WEAPON, 0 },
-    { PIN_KEY2,  KEY_RALT,       0,         0,               0 },
+    { PIN_KEY2,  KEY_USE,        KEY_ENTER, KEY_TAB,         0 },
     { PIN_KEY3,  KEY_ESCAPE,     0,         KEY_NEXT_WEAPON, 0 },
 };
 #define NUM_BTNS ((int)(sizeof(btns) / sizeof(btns[0])))
