@@ -55,6 +55,7 @@ sudo apt install libsdl2-dev libsdl2-mixer-dev timgm6mb-soundfont
 12. Clone this repository:
 
 ```shell
+cd ..
 git clone https://github.com/marianpekar/doomhat
 ```
 
