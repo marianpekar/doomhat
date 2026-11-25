@@ -114,14 +114,14 @@ To run DOOM without music, use `./run.sh -- -nomusic`. Similarly, `-nosfx` disab
 | Joystick Down | Move backward | Map zoom out (`-`) |
 | Joystick Left | Turn left | Strafe left |
 | Joystick Right | Turn right | Strafe right |
-| Joystick Press | **When held, the secondary action is applied.** | *-* | 
+| Joystick Press | Use / Open doors / Confirm | Toggle map |
 | KEY1 | Fire weapon | Previous weapon (`,`) |
-| KEY2 | Use / Open doors | Toggle map |
+| KEY2 | **When held, the secondary action is applied.** | *-* |
 | KEY3 | Open menu / Escape | Next weapon (`.`) |
 
 ### Save Game Hack
 
-With only 8 buttons, typing is quite limited, and Doom won't let you save a game without a name. But with **Joystick Press** used as a modifier for cycling through weapons with **KEY1** and **KEY3**, a solution to this problem emerged on its own.
+With only 8 buttons, typing is quite limited, and Doom won't let you save a game without a name. But with **KEY2** used as a modifier for cycling through weapons with **KEY1** and **KEY3**, a solution to this problem emerged on its own.
 
 To save a game, press **KEY3** to open the menu and navigate to *Save Game* using **Joystick Up/Down**. Press **KEY1** to confirm, select a save slot, and confirm again. Then hold **KEY2** while pressing **KEY1** to type `,` or **KEY3** to type `.`, and confirm.
 
