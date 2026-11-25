@@ -1276,7 +1276,19 @@ M_StartMessage
 ( char*		string,
   void*		routine,
   boolean	input )
-{
+{   
+    // Bypass Y/N as if player pressed Y
+    if (input && routine)
+    {
+        void (*response)(int) = routine;
+
+        messageToPrint = 0;
+        response(key_menu_confirm);
+        menuactive = false;
+        S_StartSound(NULL,sfx_swtchx);
+        return;
+    }
+    
     messageLastMenuActive = menuactive;
     messageToPrint = 1;
     messageString = string;
