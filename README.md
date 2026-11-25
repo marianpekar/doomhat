@@ -51,33 +51,33 @@ cd lg-master
 sudo make install 
 ```
 
-110. Install the SDL2 libraries used for sound and soundfont for MIDI music:
+10. Install the SDL2 libraries used for sound and soundfont for MIDI music:
 
 ```shell
 sudo apt install libsdl2-dev libsdl2-mixer-dev timgm6mb-soundfont
 ```
 
-12. Clone this repository:
+11. Clone this repository:
 
 ```shell
 cd ..
 git clone https://github.com/marianpekar/doomhat
 ```
 
-13. Run `install.sh` to build the port with `run.sh -b` (build-only flag) and add a systemd service that runs `run.sh` at boot. You can disable it later by running `./install.sh --uninstall`.
+12. Run `install.sh` to build the port with `run.sh -b` (build-only flag) and add a systemd service that runs `run.sh` at boot. You can disable it later by running `./install.sh --uninstall`.
 
 ```shell
 cd doomhat
 ./install.sh
 ```
 
-14. Get an IWAD file (e.g. `DOOM.WAD`, the shareware `doom1.wad`, or the free [Freedoom](https://freedoom.github.io/) `freedoom1.wad`) and copy it into the `doomhat` directory as `DOOM.WAD`. If the file is on your computer, run this on your computer, not on the Pi:
+13. Get an IWAD file (e.g. `DOOM.WAD`, the shareware `doom1.wad`, or the free [Freedoom](https://freedoom.github.io/) `freedoom1.wad`) and copy it into the `doomhat` directory as `DOOM.WAD`. If the file is on your computer, run this on your computer, not on the Pi:
 
 ```shell
 scp DOOM.WAD <user>@<pi-ip>:~/doomhat/DOOM.WAD
 ```
 
-15. Reboot your Raspberry Pi:
+14. Reboot your Raspberry Pi:
 
 ```shell
 sudo reboot
