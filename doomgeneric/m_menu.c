@@ -1670,6 +1670,13 @@ boolean M_Responder (event_t* ev)
     {
 	if (messageNeedsInput)
         {
+            // KEY1 (fire) == Y
+            // KEY3 (escape) == N
+            if (key == KEY_FIRE)
+            {
+                key = key_menu_confirm;
+            }
+
             if (key != ' ' && key != KEY_ESCAPE
              && key != key_menu_confirm && key != key_menu_abort)
             {
