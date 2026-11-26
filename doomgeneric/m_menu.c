@@ -1495,7 +1495,7 @@ boolean M_Responder (event_t* ev)
         else
         {
             S_StartSound(NULL,sfx_swtchn);
-            M_QuitDOOM(0);
+            M_Shutdown(0);
         }
 
         return true;
@@ -1788,7 +1788,7 @@ boolean M_Responder (event_t* ev)
         else if (key == key_menu_quit)     // Quit DOOM
         {
 	    S_StartSound(NULL,sfx_swtchn);
-	    M_QuitDOOM(0);
+	    M_Shutdown(0);
 	    return true;
         }
         else if (key == key_menu_gamma)    // gamma toggle
