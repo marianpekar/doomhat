@@ -623,6 +623,46 @@ void M_DoSave(int slot)
 }
 
 //
+// Auto-numbered save names ("Save 1", "Save 2", ...), so a save can be
+// made without typing.
+//
+static char *M_SaveCountFile(void)
+{
+    return M_StringJoin(savegamedir, "savecount.txt", NULL);
+}
+
+static int M_ReadSaveCounter(void)
+{
+    char *filename = M_SaveCountFile();
+    FILE *handle = fopen(filename, "r");
+    int count = 0;
+
+    if (handle != NULL)
+    {
+        if (fscanf(handle, "%d", &count) != 1 || count < 0)
+            count = 0;
+        fclose(handle);
+    }
+
+    free(filename);
+    return count;
+}
+
+static void M_WriteSaveCounter(int count)
+{
+    char *filename = M_SaveCountFile();
+    FILE *handle = fopen(filename, "w");
+
+    if (handle != NULL)
+    {
+        fprintf(handle, "%d\n", count);
+        fclose(handle);
+    }
+
+    free(filename);
+}
+
+//
 // User wants to save. Start string input for M_Responder
 //
 void M_SaveSelect(int choice)
@@ -632,8 +672,8 @@ void M_SaveSelect(int choice)
     
     saveSlot = choice;
     M_StringCopy(saveOldString,savegamestrings[choice], SAVESTRINGSIZE);
-    if (!strcmp(savegamestrings[choice], EMPTYSTRING))
-	savegamestrings[choice][0] = 0;
+    M_snprintf(savegamestrings[choice], SAVESTRINGSIZE, "Save %d",
+               M_ReadSaveCounter() + 1);
     saveCharIndex = strlen(savegamestrings[choice]);
 }
 
@@ -1597,7 +1637,10 @@ boolean M_Responder (event_t* ev)
 	  case KEY_ENTER:
 	    saveStringEnter = 0;
 	    if (savegamestrings[saveSlot][0])
+	    {
+		M_WriteSaveCounter(M_ReadSaveCounter() + 1);
 		M_DoSave(saveSlot);
+	    }
 	    break;
 
 	  default:

@@ -123,12 +123,6 @@ To run DOOM without music, use `./run.sh -- -nomusic`. Similarly, `-nosfx` disab
 
 The *Quit Game* option in the main menu saves settings and powers off the Raspberry Pi. When the green ACT LED stops blinking, you can safely switch off the battery. `install.sh` adds a sudoers rule (`/etc/sudoers.d/doomhat`) that allows the game to run `systemctl poweroff` without a password.
 
-### Save Game Hack
-
-With only 8 buttons, typing is quite limited, and Doom won't let you save a game without a name. But with **KEY2** used as a modifier for cycling through weapons with **KEY1** and **KEY3**, a solution to this problem emerged on its own.
-
-To save a game, press **KEY3** to open the menu and navigate to *Save Game* using **Joystick Up/Down**. Press **KEY1** to confirm, select a save slot, and confirm again. Then hold **KEY2** while pressing **KEY1** to type `,` or **KEY3** to type `.`, and confirm.
-
 ## Project Structure
 
 ```txt
