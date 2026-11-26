@@ -1670,9 +1670,9 @@ boolean M_Responder (event_t* ev)
     {
 	if (messageNeedsInput)
         {
-            // KEY1 (fire) == Y
+            // KEY2 (ralt) == Y
             // KEY3 (escape) == N
-            if (key == KEY_FIRE)
+            if (key == KEY_RALT)
             {
                 key = key_menu_confirm;
             }
