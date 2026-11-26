@@ -9,12 +9,13 @@ set -euo pipefail
 
 SERVICE="doomhat"
 UNIT="/etc/systemd/system/$SERVICE.service"
+SUDOERS="/etc/sudoers.d/$SERVICE"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 RUN_USER="${SUDO_USER:-$USER}"
 
 if [ "${1:-}" = "--uninstall" ]; then
     sudo systemctl disable --now "$SERVICE" 2>/dev/null || true
-    sudo rm -f "$UNIT"
+    sudo rm -f "$UNIT" "$SUDOERS"
     sudo systemctl daemon-reload
     sudo loginctl disable-linger "$RUN_USER"
     echo "Removed $SERVICE service."
@@ -37,6 +38,17 @@ for grp in gpio spi i2c; do
         sudo usermod -aG "$grp" "$RUN_USER"
     fi
 done
+
+# Let the Quit Game menu option power off the Pi without a password
+echo "Writing $SUDOERS"
+TMP_SUDOERS="$(mktemp)"
+echo "$RUN_USER ALL=(root) NOPASSWD: /usr/bin/systemctl poweroff" > "$TMP_SUDOERS"
+if sudo visudo -cqf "$TMP_SUDOERS"; then
+    sudo install -m 0440 -o root -g root "$TMP_SUDOERS" "$SUDOERS"
+else
+    echo "Generated sudoers rule is invalid, skipping (Shutdown menu option won't work)" >&2
+fi
+rm -f "$TMP_SUDOERS"
 
 RUN_UID="$(id -u "$RUN_USER")"
 if ! loginctl show-user "$RUN_USER" -p Linger 2>/dev/null | grep -q "yes"; then

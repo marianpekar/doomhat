@@ -46,6 +46,7 @@
 #include "g_game.h"
 
 #include "m_argv.h"
+#include "m_config.h"
 #include "m_controls.h"
 #include "p_saveg.h"
 
@@ -183,6 +184,7 @@ void M_EndGame(int choice);
 void M_ReadThis(int choice);
 void M_ReadThis2(int choice);
 void M_QuitDOOM(int choice);
+void M_Shutdown(int choice);
 
 void M_ChangeMessages(int choice);
 void M_ChangeSensitivity(int choice);
@@ -234,6 +236,7 @@ enum
     options,
     loadgame,
     savegame,
+    shutdown,
     main_end
 } main_e;
 
@@ -242,7 +245,8 @@ menuitem_t MainMenu[]=
     {1,"M_NGAME",M_NewGame,'n'},
     {1,"M_OPTION",M_Options,'o'},
     {1,"M_LOADG",M_LoadGame,'l'},
-    {1,"M_SAVEG",M_SaveGame,'s'}
+    {1,"M_SAVEG",M_SaveGame,'s'},
+    {1,"M_QUITG",M_Shutdown,'q'}
 };
 
 menu_t  MainDef =
@@ -1159,6 +1163,17 @@ void M_QuitDOOM(int choice)
     M_StartMessage(endstring,M_QuitResponse,true);
 }
 
+
+
+void M_Shutdown(int choice)
+{
+    M_SaveDefaults();
+
+    if (system("sudo -n systemctl poweroff") != 0)
+    {
+        M_StartMessage("shutdown failed", NULL, false);
+    }
+}
 
 
 

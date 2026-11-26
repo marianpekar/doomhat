@@ -110,14 +110,18 @@ To run DOOM without music, use `./run.sh -- -nomusic`. Similarly, `-nosfx` disab
 
 | Input | Primary Action | Secondary Action |
 |---|---|---|
-| Joystick Up | Move forward | Map zoom in (`=`) |
-| Joystick Down | Move backward | Map zoom out (`-`) |
+| Joystick Up | Move forward | Map zoom in / Screen size up (`=`) |
+| Joystick Down | Move backward | Map zoom out / Screen size up (`-`) |
 | Joystick Left | Turn left | Strafe left |
 | Joystick Right | Turn right | Strafe right |
 | Joystick Press | Use / Open doors / Confirm | Toggle map |
 | KEY1 | Fire weapon | Previous weapon (`,`) |
 | KEY2 | **When held, the secondary action is applied.** | *-* |
 | KEY3 | Open menu / Escape | Next weapon (`.`) |
+
+### Shutdown
+
+The *Quit Game* option in the main menu saves settings and powers off the Raspberry Pi. When the green ACT LED stops blinking, you can safely switch off the battery. `install.sh` adds a sudoers rule (`/etc/sudoers.d/doomhat`) that allows the game to run `systemctl poweroff` without a password.
 
 ### Save Game Hack
 
