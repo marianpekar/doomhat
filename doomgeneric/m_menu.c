@@ -1825,6 +1825,16 @@ boolean M_Responder (event_t* ev)
 
     // Keys usable within menu
 
+    // KEY1 (fire) confirms in menu; joystick press (enter) is ignored here
+    if (key == KEY_FIRE)
+    {
+        key = key_menu_forward;
+    }
+    else if (key == key_menu_forward)
+    {
+        return true;
+    }
+
     if (key == key_menu_down)
     {
         // Move down to next item
