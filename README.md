@@ -111,7 +111,7 @@ To run DOOM without music, use `./run.sh -- -nomusic`. Similarly, `-nosfx` disab
 | Input | Primary Action | Secondary Action |
 |---|---|---|
 | Joystick Up | Move forward | Map zoom in / Screen size up (`=`) |
-| Joystick Down | Move backward | Map zoom out / Screen size up (`-`) |
+| Joystick Down | Move backward | Map zoom out / Screen size down (`-`) |
 | Joystick Left | Turn left | Strafe left |
 | Joystick Right | Turn right | Strafe right |
 | Joystick Press | Use / Open doors / Confirm | Toggle map |
