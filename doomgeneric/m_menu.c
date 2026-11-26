@@ -1205,14 +1205,23 @@ void M_QuitDOOM(int choice)
 
 
 
-void M_Shutdown(int choice)
+void M_ShutdownResponse(int key)
 {
+    if (key != key_menu_confirm)
+	return;
+
     M_SaveDefaults();
 
     if (system("sudo -n systemctl poweroff") != 0)
     {
         M_StartMessage("shutdown failed", NULL, false);
     }
+}
+
+void M_Shutdown(int choice)
+{
+    M_StartMessage("shut down the device?\n\n(KEY2 = yes, KEY3 = no)",
+                   M_ShutdownResponse, true);
 }
 
 
@@ -1488,9 +1497,9 @@ boolean M_Responder (event_t* ev)
         // First click on close button = bring up quit confirm message.
         // Second click on close button = confirm quit
 
-        if (menuactive && messageToPrint && messageRoutine == M_QuitResponse)
+        if (menuactive && messageToPrint && messageRoutine == M_ShutdownResponse)
         {
-            M_QuitResponse(key_menu_confirm);
+            M_ShutdownResponse(key_menu_confirm);
         }
         else
         {
