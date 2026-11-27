@@ -39,7 +39,7 @@
 #define LOADNET 	"you can't do load while in a net game!\n\n"PRESSKEY
 #define QLOADNET	"you can't quickload during a netgame!\n\n"PRESSKEY
 #define QSAVESPOT	"you haven't picked a quicksave slot yet!\n\n"PRESSKEY
-#define SAVEDEAD 	"you can't save if you aren't playing!\n\n"PRESSKEY
+#define SAVEDEAD 	"you aren't playing!\n\n"PRESSKEY
 #define QSPROMPT 	"quicksave over your game named\n\n'%s'?\n\n"PRESSYN
 #define QLPROMPT	"do you want to quickload the game named\n\n'%s'?\n\n"PRESSYN
 #define SHDWNPROMPT "shutdown the device?\n\n"PRESSYN
@@ -76,57 +76,57 @@
 //
 //	P_inter.C
 //
-#define GOTARMOR	"Picked up the armor."
-#define GOTMEGA	"Picked up the MegaArmor!"
-#define GOTHTHBONUS	"Picked up a health bonus."
-#define GOTARMBONUS	"Picked up an armor bonus."
-#define GOTSTIM	"Picked up a stimpack."
-#define GOTMEDINEED	"Picked up a medikit that you REALLY need!"
-#define GOTMEDIKIT	"Picked up a medikit."
+#define GOTARMOR	"Got armor."
+#define GOTMEGA	    "Got MegaArmor!"
+#define GOTHTHBONUS	"Got health bonus."
+#define GOTARMBONUS	"Got armor bonus."
+#define GOTSTIM	    "Got stimpack."
+#define GOTMEDINEED	"Got much needed medikit."
+#define GOTMEDIKIT	"Got medikit."
 #define GOTSUPER	"Supercharge!"
 
-#define GOTBLUECARD	"Picked up a blue keycard."
-#define GOTYELWCARD	"Picked up a yellow keycard."
-#define GOTREDCARD	"Picked up a red keycard."
-#define GOTBLUESKUL	"Picked up a blue skull key."
-#define GOTYELWSKUL	"Picked up a yellow skull key."
-#define GOTREDSKULL	"Picked up a red skull key."
+#define GOTBLUECARD	"Got blue keycard."
+#define GOTYELWCARD	"Got yellow keycard."
+#define GOTREDCARD	"Got red keycard."
+#define GOTBLUESKUL	"Got blue skull key."
+#define GOTYELWSKUL	"Got yellow skull key."
+#define GOTREDSKULL	"Got red skull key."
 
 #define GOTINVUL	"Invulnerability!"
 #define GOTBERSERK	"Berserk!"
 #define GOTINVIS	"Partial Invisibility"
-#define GOTSUIT	"Radiation Shielding Suit"
-#define GOTMAP	"Computer Area Map"
-#define GOTVISOR	"Light Amplification Visor"
+#define GOTSUIT	    "Radiation Shielding Suit"
+#define GOTMAP	    "Computer Area Map"
+#define GOTVISOR	"Light Visor"
 #define GOTMSPHERE	"MegaSphere!"
 
-#define GOTCLIP	"Picked up a clip."
-#define GOTCLIPBOX	"Picked up a box of bullets."
-#define GOTROCKET	"Picked up a rocket."
-#define GOTROCKBOX	"Picked up a box of rockets."
-#define GOTCELL	"Picked up an energy cell."
-#define GOTCELLBOX	"Picked up an energy cell pack."
-#define GOTSHELLS	"Picked up 4 shotgun shells."
-#define GOTSHELLBOX	"Picked up a box of shotgun shells."
-#define GOTBACKPACK	"Picked up a backpack full of ammo!"
+#define GOTCLIP	    "Got clip."
+#define GOTCLIPBOX	"Got box of bullets."
+#define GOTROCKET	"Got rocket."
+#define GOTROCKBOX	"Got box of rockets."
+#define GOTCELL	    "Got energy cell."
+#define GOTCELLBOX	"Got energy cell pack."
+#define GOTSHELLS	"Got 4 shells."
+#define GOTSHELLBOX	"Got box of shells."
+#define GOTBACKPACK	"Got backpack!"
 
-#define GOTBFG9000	"You got the BFG9000!  Oh, yes."
-#define GOTCHAINGUN	"You got the chaingun!"
-#define GOTCHAINSAW	"A chainsaw!  Find some meat!"
-#define GOTLAUNCHER	"You got the rocket launcher!"
-#define GOTPLASMA	"You got the plasma gun!"
-#define GOTSHOTGUN	"You got the shotgun!"
-#define GOTSHOTGUN2	"You got the super shotgun!"
+#define GOTBFG9000	"BFG9000!  Oh, yes."
+#define GOTCHAINGUN	"Chaingun!"
+#define GOTCHAINSAW	"Chainsaw! Vrrrrrr!"
+#define GOTLAUNCHER	"Got rocket launcher!"
+#define GOTPLASMA	"Got plasma gun!"
+#define GOTSHOTGUN	"Got shotgun!"
+#define GOTSHOTGUN2	"Got super shotgun!"
 
 //
 // P_Doors.C
 //
-#define PD_BLUEO	"You need a blue key to activate this object"
-#define PD_REDO	"You need a red key to activate this object"
-#define PD_YELLOWO	"You need a yellow key to activate this object"
-#define PD_BLUEK	"You need a blue key to open this door"
-#define PD_REDK	"You need a red key to open this door"
-#define PD_YELLOWK	"You need a yellow key to open this door"
+#define PD_BLUEO	"You need a blue key"
+#define PD_REDO	    "You need a red key"
+#define PD_YELLOWO	"You need a yellow key"
+#define PD_BLUEK	PD_BLUEO
+#define PD_REDK	    PD_REDO
+#define PD_YELLOWK	PD_YELLOWO
 
 //
 //	G_game.C
