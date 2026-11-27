@@ -271,6 +271,62 @@ void V_DrawPatchDirect(int x, int y, patch_t *patch)
 } 
 
 //
+// V_DrawPatch2x
+// Draws a patch at double size (each pixel becomes 2x2).
+// Pixels outside the screen are skipped.
+//
+
+void V_DrawPatch2x(int x, int y, patch_t *patch)
+{
+    int col, w, count, sx, sy;
+    column_t *column;
+    byte *source;
+
+    y -= SHORT(patch->topoffset) * 2;
+    x -= SHORT(patch->leftoffset) * 2;
+
+    V_MarkRect(x, y, SHORT(patch->width) * 2, SHORT(patch->height) * 2);
+
+    w = SHORT(patch->width);
+
+    for (col = 0; col < w; col++)
+    {
+        sx = x + col * 2;
+        column = (column_t *)((byte *)patch + LONG(patch->columnofs[col]));
+
+        while (column->topdelta != 0xff)
+        {
+            source = (byte *)column + 3;
+            sy = y + column->topdelta * 2;
+            count = column->length;
+
+            while (count--)
+            {
+                int dx, dy;
+
+                for (dy = 0; dy < 2; dy++)
+                {
+                    for (dx = 0; dx < 2; dx++)
+                    {
+                        int px = sx + dx, py = sy + dy;
+
+                        if (px >= 0 && px < SCREENWIDTH
+                         && py >= 0 && py < SCREENHEIGHT)
+                        {
+                            dest_screen[py * SCREENWIDTH + px] = *source;
+                        }
+                    }
+                }
+
+                source++;
+                sy += 2;
+            }
+            column = (column_t *)((byte *)column + column->length + 4);
+        }
+    }
+}
+
+//
 // V_DrawTLPatch
 //
 // Masks a column based translucent masked pic to the screen.

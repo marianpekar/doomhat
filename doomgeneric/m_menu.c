@@ -1447,6 +1447,32 @@ M_WriteText
     }
 }
 
+//
+// Write a single line of text using the hu_font at double size
+//
+static void M_WriteText2x(int x, int y, char *string)
+{
+    char*	ch;
+    int		c;
+    int		cx;
+
+    ch = string;
+    cx = x;
+
+    while ((c = *ch++) != 0)
+    {
+	c = toupper(c) - HU_FONTSTART;
+	if (c < 0 || c >= HU_FONTSIZE)
+	{
+	    cx += 8;
+	    continue;
+	}
+
+	V_DrawPatch2x(cx, y, hu_font[c]);
+	cx += SHORT(hu_font[c]->width) * 2;
+    }
+}
+
 // These keys evaluate to a "null" key in Vanilla Doom that allows weird
 // jumping in the menus. Preserve this behavior for accuracy.
 
@@ -2034,7 +2060,7 @@ void M_Drawer (void)
     if (messageToPrint)
     {
 	start = 0;
-	y = SCREENHEIGHT/2 - M_StringHeight(messageString) / 2;
+	y = SCREENHEIGHT/2 - M_StringHeight(messageString);
 	while (messageString[start] != '\0')
 	{
 	    int foundnewline = 0;
@@ -2062,9 +2088,9 @@ void M_Drawer (void)
                 start += strlen(string);
             }
 
-	    x = SCREENWIDTH/2 - M_StringWidth(string) / 2;
-	    M_WriteText(x, y, string);
-	    y += SHORT(hu_font[0]->height);
+	    x = SCREENWIDTH/2 - M_StringWidth(string);
+	    M_WriteText2x(x, y, string);
+	    y += SHORT(hu_font[0]->height) * 2;
 	}
 
 	return;

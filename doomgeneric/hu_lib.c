@@ -90,6 +90,33 @@ boolean HUlib_delCharFromTextLine(hu_textline_t* t)
 
 }
 
+//
+// Draw a text line at double size (used for HUD messages)
+//
+static void HUlib_drawTextLine2x(hu_textline_t* l)
+{
+    int			i;
+    int			x;
+    unsigned char	c;
+
+    x = l->x;
+    for (i=0;i<l->len;i++)
+    {
+	c = toupper((int)l->l[i]);
+	if (c != ' '
+	    && c >= l->sc
+	    && c <= '_')
+	{
+	    V_DrawPatch2x(x, l->y, l->f[c - l->sc]);
+	    x += SHORT(l->f[c - l->sc]->width) * 2;
+	}
+	else
+	{
+	    x += 8;
+	}
+    }
+}
+
 void
 HUlib_drawTextLine
 ( hu_textline_t*	l,
@@ -134,7 +161,7 @@ HUlib_drawTextLine
 
 
 // sorta called by HU_Erase and just better darn get things straight
-void HUlib_eraseTextLine(hu_textline_t* l)
+static void HUlib_eraseTextLineScaled(hu_textline_t* l, int scale)
 {
     int			lh;
     int			y;
@@ -147,7 +174,7 @@ void HUlib_eraseTextLine(hu_textline_t* l)
     if (!automapactive &&
 	viewwindowx && l->needsupdate)
     {
-	lh = SHORT(l->f[0]->height) + 1;
+	lh = SHORT(l->f[0]->height) * scale + 1;
 	for (y=l->y,yoffset=y*SCREENWIDTH ; y<l->y+lh ; y++,yoffset+=SCREENWIDTH)
 	{
 	    if (y < viewwindowy || y >= viewwindowy + viewheight)
@@ -163,6 +190,11 @@ void HUlib_eraseTextLine(hu_textline_t* l)
 
     if (l->needsupdate) l->needsupdate--;
 
+}
+
+void HUlib_eraseTextLine(hu_textline_t* l)
+{
+    HUlib_eraseTextLineScaled(l, 1);
 }
 
 void
@@ -238,7 +270,7 @@ void HUlib_drawSText(hu_stext_t* s)
 	l = &s->l[idx];
 
 	// need a decision made here on whether to skip the draw
-	HUlib_drawTextLine(l, false); // no cursor, please
+	HUlib_drawTextLine2x(l); // double size, no cursor
     }
 
 }
@@ -252,7 +284,7 @@ void HUlib_eraseSText(hu_stext_t* s)
     {
 	if (s->laston && !*s->on)
 	    s->l[i].needsupdate = 4;
-	HUlib_eraseTextLine(&s->l[i]);
+	HUlib_eraseTextLineScaled(&s->l[i], 2);
     }
     s->laston = *s->on;
 
