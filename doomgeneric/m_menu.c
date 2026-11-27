@@ -1631,7 +1631,7 @@ boolean M_Responder (event_t* ev)
                          SAVESTRINGSIZE);
             break;
 
-	  case KEY_ENTER:
+	  case KEY_FIRE:
 	    saveStringEnter = 0;
 	    if (savegamestrings[saveSlot][0])
 	    {
