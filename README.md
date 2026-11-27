@@ -115,8 +115,8 @@ To run DOOM without music, use `./run.sh -- -nomusic`. Similarly, `-nosfx` disab
 | Joystick Left | Turn left | Strafe left |
 | Joystick Right | Turn right | Strafe right |
 | Joystick Press | Use / Open doors | Toggle map |
-| KEY1 | Fire weapon / Confirm (in menu) | Previous weapon (`,`) |
-| KEY2 | **When held, the secondary action is applied.** / Confirm (in Y/N choices) | *-* |
+| KEY1 | Fire weapon / Confirm | Previous weapon (`,`) |
+| KEY2 | **When held, the secondary action is applied.** | *-* |
 | KEY3 | Open menu / Escape | Next weapon (`.`) |
 
 ### Shutdown
