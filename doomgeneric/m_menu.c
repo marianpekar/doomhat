@@ -1214,14 +1214,13 @@ void M_ShutdownResponse(int key)
 
     if (system("sudo -n systemctl poweroff") != 0)
     {
-        M_StartMessage("shutdown failed", NULL, false);
+        M_StartMessage(SHDWNFAILED, NULL, false);
     }
 }
 
 void M_Shutdown(int choice)
 {
-    M_StartMessage("shut down the device?\n\n(KEY2 = yes, KEY3 = no)",
-                   M_ShutdownResponse, true);
+    M_StartMessage(SHDWNPROMPT,M_ShutdownResponse,true);
 }
 
 

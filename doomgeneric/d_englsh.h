@@ -42,6 +42,8 @@
 #define SAVEDEAD 	"you can't save if you aren't playing!\n\n"PRESSKEY
 #define QSPROMPT 	"quicksave over your game named\n\n'%s'?\n\n"PRESSYN
 #define QLPROMPT	"do you want to quickload the game named\n\n'%s'?\n\n"PRESSYN
+#define SHDWNPROMPT "shutdown the device?\n\n"PRESSYN
+#define SHDWNFAILED "shutdown failed"
 
 #define NEWGAME	\
 "you can't start a new game\n"\
