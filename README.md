@@ -123,7 +123,7 @@ To run DOOM without music, use `./run.sh -- -nomusic`. Similarly, `-nosfx` disab
 
 ### Shutdown
 
-The *Quit Game* option in the main menu saves settings and powers off the Raspberry Pi. When the green ACT LED stops blinking, you can safely switch off the battery. `install.sh` adds a sudoers rule (`/etc/sudoers.d/doomhat`) that allows the game to run `systemctl poweroff` without a password.
+The *Quit Game* option in the main menu saves settings and shutsdowns the system. Wait until the LCD turns white, then you can safely switch off the battery. `install.sh` adds a sudoers rule (`/etc/sudoers.d/doomhat`) that allows the game to run `systemctl poweroff` without a password.
 
 ## Project Structure
 
