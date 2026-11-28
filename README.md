@@ -90,6 +90,8 @@ On a Raspberry Pi Zero 2 W with Raspberry Pi OS (64-bit) 2026-10-06 release, the
 The Waveshare 1.44inch LCD HAT has no speaker and the Pi Zero 2 W has no audio jack, so sound goes to Bluetooth headphones (or any other audio output device connected). Pair and trust them once, so they reconnect automatically:
 
 ```shell
+sudo systemctl enable --now bluetooth
+
 bluetoothctl
 # power on
 # scan on
